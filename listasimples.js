@@ -48,9 +48,63 @@ class ListaEncadeada {
     }
     return elemento;
   }
+
+  searchAt(posicao) {
+    let atual = this.head;
+    for (let i = 0; i < posicao && atual; i++) {
+      atual = atual.proximo;
+    }
+    return atual;
+  }
+
+  insertAt(elemento, posicao) {
+    const novo = new No(elemento);
+    if (posicao == 0) {
+      this.insertFirst(elemento);
+    } else {
+      const anterior = this.searchAt(posicao - 1);
+      const atual = anterior.proximo;
+      novo.proximo = atual;
+      anterior.proximo = novo;
+    }
+    return elemento;
+  }
+
+  traversal() {
+    if (!this.head) {
+      return undefined;
+    } else {
+      let atual = this.head;
+      let elementoLista = [];
+      while (atual) {
+        elementoLista.push(atual.proximo);
+        atual = atual.proximo;
+      }
+      return elementoLista;
+    }
+  }
+
+  deleteAt(posicao) {
+    let atual = this.head;
+    if (posicao == 0) {
+      this.head = atual.proximo;
+    } else {
+      let anterior = atual;
+      for (let i = 0; i < posicao; i++) {
+        anterior = atual;
+        atual = atual.proximo;
+      }
+      anterior.proximo = atual.proximo;
+    }
+    return posicao;
+  }
 }
 
 const trem = new ListaEncadeada();
 console.log(trem.insertFirst('Locomotiva'));
 console.log(trem.insertLast('Vagao 1'));
 console.log(trem.insertLast('Vagao 2'));
+console.log(trem.searchAt(2));
+console.log(trem.insertFirst('Vagao de Manobra'));
+console.log(trem.insertAt('Novo Vagao', 2));
+console.table(trem.traversal());
