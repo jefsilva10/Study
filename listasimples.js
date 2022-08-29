@@ -98,6 +98,21 @@ class ListaEncadeada {
     }
     return posicao;
   }
+
+  indexOf(elemento) {
+    let atual = this.Header;
+    let contador = 0;
+    while (atual) {
+      if (atual.elemento == elemento) {
+        return contador;
+        break;
+      } else {
+        atual = atual.proximo;
+        contador++;
+      }
+    }
+    return undefined;
+  }
 }
 
 const trem = new ListaEncadeada();
@@ -107,4 +122,8 @@ console.log(trem.insertLast('Vagao 2'));
 console.log(trem.searchAt(2));
 console.log(trem.insertFirst('Vagao de Manobra'));
 console.log(trem.insertAt('Novo Vagao', 2));
-console.table(trem.traversal());
+console.log(trem.deleteAt(2));
+console.log(trem.deleteAt(0));
+console.log(`Posição da Locomotiva: ${trem.indexOf('Locomotiva')}`);
+console.log(`Posição do Vagão 2: ${trem.indexOf('Vagao 2')}`);
+console.log(`Cade o Thomas?: ${trem.indexOf('Thomas')}`);
